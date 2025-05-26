@@ -1,5 +1,43 @@
 import React from 'react';
 
+function Listing() {
+  const containerStyle = {
+    height: '100vh',
+    width: '100%',
+    backgroundColor: 'white',
+    color: 'black',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: '1.5rem',
+    paddingTop: '60px',
+    padding: '2rem',
+  };
+
+  return (
+    <div style={containerStyle}>
+      <h2>Available Listings</h2>
+      <ul>
+        <li>Name: John Doe | Guests: 3 | Days: 5</li>
+        <li>Name: Sarah Smith | Guests: 2 | Days: 3</li>
+        <li>Name: Mike Johnson | Guests: 4 | Days: 7</li>
+      </ul>
+    </div>
+  );
+}
+
+export default Listing;
+
+
+
+
+
+
+
+
+/*import React from 'react';
+
 const listings = [
   {
     id: 1,
@@ -35,34 +73,4 @@ function Listing() {
   );
 }
 
-export default Listing;
-
-
-
-/*import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-
-const Listings = () => {
-  const [listings, setListings] = useState([]);
-
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/listings')
-      .then(res => setListings(res.data))
-      .catch(err => console.error(err));
-  }, []);
-
-  return (
-    <div style={{ padding: '1rem' }}>
-      <h2>All Listings</h2>
-      <ul>
-        {listings.map(listing => (
-          <li key={listing.id}>
-            {listing.name} - {listing.city} - ${listing.price}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
-export default Listings;*/
+export default Listing;*/
