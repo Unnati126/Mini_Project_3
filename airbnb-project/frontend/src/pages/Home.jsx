@@ -1,4 +1,70 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Home.css';
+
+const Home = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    checkIn: '',
+    checkOut: '',
+    members: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate('/listing'); // Redirect to listing page
+  };
+
+  return (
+    <div className="home-container">
+      <form onSubmit={handleSubmit} className="home-form">
+        <h2>Welcome to Airbnb</h2>
+        
+        <label>Name:</label>
+        <input type="text" name="name" onChange={handleChange} required />
+
+        <label>Email:</label>
+        <input type="email" name="email" onChange={handleChange} required />
+
+        <label>Check-in Date:</label>
+        <input type="date" name="checkIn" onChange={handleChange} required />
+
+        <label>Check-out Date:</label>
+        <input type="date" name="checkOut" onChange={handleChange} required />
+
+        <label>Number of Members:</label>
+        <input type="number" name="members" onChange={handleChange} required />
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+};
+
+export default Home;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*import { useState } from 'react';
 
 function Home() {
   const [formData, setFormData] = useState({
@@ -67,57 +133,6 @@ function Home() {
         </div>
 
         <button type="submit" style={{ padding: '8px', backgroundColor: '#ff5a5f', color: 'white', border: 'none', borderRadius: '4px' }}>Submit</button>
-      </form>
-    </div>
-  );
-}
-
-export default Home;
-
-
-
-
-
-
-
-/*import { useState } from 'react';
-
-function Home() {
-  const [formData, setFormData] = useState({
-    name: '',
-    checkin: '',
-    checkout: '',
-    members: ''
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`Welcome, ${formData.name}!`);
-    setFormData({ name: '', checkin: '', checkout: '', members: '' });
-  };
-
-  return (
-    <div style={{
-      backgroundColor: 'white',
-      color: 'black',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '50px',
-      textAlign: 'center'
-    }}>
-      <h2>Welcome to Airbnb</h2>
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxWidth: '300px', width: '100%' }}>
-        <input name="name" type="text" placeholder="Your Name" value={formData.name} onChange={handleChange} required />
-        <input name="checkin" type="date" placeholder="Check-in" value={formData.checkin} onChange={handleChange} required />
-        <input name="checkout" type="date" placeholder="Check-out" value={formData.checkout} onChange={handleChange} required />
-        <input name="members" type="number" placeholder="No. of Members" value={formData.members} onChange={handleChange} required min="1" />
-        <button type="submit">Submit</button>
       </form>
     </div>
   );

@@ -1,0 +1,34 @@
+.home-container {
+  display: flex;
+  justify-content: center;
+  height: 65vh;
+  align-items: center;
+  background-color: white;
+}
+
+.home-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 400px;
+
+  }
+
+.home-form input, .home-form button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 8px;
+  font-size: 16px;
+  color: rgb(253, 251, 251);
+  border: 1px solid #ccc;
+}
+
+.home-form button {
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
