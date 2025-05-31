@@ -1,10 +1,12 @@
 const express = require('express');
 const cors = require('cors');
 const listingRoutes = require('./routes/listingRoutes');
+let db = require("./db");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
 
 // Routes
 app.use('/api/listings', listingRoutes);
@@ -12,8 +14,6 @@ app.use('/api/listings', listingRoutes);
 app.listen(5000, () => {
   console.log('Server running on http://localhost:5000');
 });
-
-
 
 
 
