@@ -1,3 +1,6 @@
+const { DataTypes } = require("sequelize");
+const sequelize = require("../database/database");
+
 const User = require("./user")(sequelize, DataTypes);
 const Property = require("./property")(sequelize, DataTypes);
 const Review = require("./review")(sequelize, DataTypes);
@@ -11,13 +14,12 @@ Review.belongsTo(Property, { foreignKey: "property_id", onDelete: "CASCADE" });
 async function init() {
   await User.sync();
   await Property.sync();
-  await Review.sync(); 
-  //sync models here
+  await Review.sync();
 }
 init();
+
 module.exports = {
-  User, Property, Review
-  //export models here
+  User,
+  Property,
+  Review,
 };
-
-
