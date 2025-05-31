@@ -9,8 +9,8 @@ npm ci
 .env should contain:
 
 ``` 
-DB_NAME=properties // this should be the name of a database in your local mySQL that matches the schema in models
-DB_USER=root // this should be the user this database belongs to
+DB_NAME=properties // this should be the name of a database in your local mySQL
+DB_USER=root // this should be the user that can access the database above with read and write permissions
 DB_HOST="127.0.0.1"
 ```
 
