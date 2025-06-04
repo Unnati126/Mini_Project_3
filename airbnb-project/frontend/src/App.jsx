@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import Listing from './pages/Listing';
 import About from './pages/About';
 import Navbar from './components/Navbar';
+import { ListingProvider } from './pages/ListingContext.jsx';
+
 
 function App() {
   return (
@@ -15,8 +17,14 @@ function App() {
           <Route path="/listing" element={<Listing />} />
           <Route path="/about" element={<About />} />
         </Routes>
+
+      <ListingProvider>
+      <App />
+      </ListingProvider>
+
       </div>
     </Router>
+
   );
 }
 
