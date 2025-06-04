@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useEffect } from "react";
+import { createContext, useReducer, useEffect } from "react";
 import axios from "axios";
 
 const ListingContext = createContext();
@@ -87,5 +87,3 @@ export function ListingProvider({ children }) {
     </ListingContext.Provider>
   );
 }
-
-export const useListings = () => useContext(ListingContext);
