@@ -1,7 +1,15 @@
-import { createContext, useReducer, useEffect } from "react";
+import React, { createContext, useReducer, useEffect, useContext } from "react";
 import axios from "axios";
 
 const ListingContext = createContext();
+
+export const useListings = () => {
+  const context = useContext(ListingContext);
+  if (!context) {
+    throw new Error("useListings must be used within a ListingProvider");
+  }
+  return context;
+};
 
 const initialState = {
   listings: [],
@@ -17,6 +25,7 @@ const initialState = {
   },
   editId: null,
 };
+
 
 function listingReducer(state, action) {
   switch (action.type) {
@@ -36,6 +45,7 @@ function listingReducer(state, action) {
       return state;
   }
 }
+
 
 export function ListingProvider({ children }) {
   const [state, dispatch] = useReducer(listingReducer, initialState);
