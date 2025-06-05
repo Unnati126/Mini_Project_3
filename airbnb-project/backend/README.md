@@ -12,6 +12,7 @@ npm ci
 DB_NAME=properties // this should be the name of a database in your local mySQL
 DB_USER=root // this should be the user that can access the database above with read and write permissions
 DB_HOST="127.0.0.1"
+JWT_SECRET=supersecretkey123
 ```
 
 Need to create single user in the users table before the listings endpoint can function, for example:

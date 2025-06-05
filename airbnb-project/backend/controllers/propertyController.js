@@ -39,7 +39,7 @@ async function createProperty(req, res) {
     });
     res.status(201).json(newProperty);
   } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message }); // Send just the error message to client
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 }
 
