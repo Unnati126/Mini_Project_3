@@ -41,7 +41,7 @@ const Home = () => {
         <label>Email:</label> {}
         <input
           type="email"
-          name="email" 
+          name="email"
           value={loginData.email}
           onChange={handleChange}
           required

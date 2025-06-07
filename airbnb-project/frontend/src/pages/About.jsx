@@ -17,7 +17,6 @@ function About() {
   return (
     <div style={{
       backgroundColor: 'white',
-      //color: 'black',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
