@@ -4,11 +4,13 @@ import Home from './pages/Home';
 import Listing from './pages/Listing';
 import About from './pages/About';
 import Navbar from './components/Navbar';
-import { ListingProvider } from './context/Listingcontext';
+import { ListingProvider } from './context/ListingContext';
+import { ListingFormProvider } from './context/ListingFormContext';
 
 function App() {
   return (
-    <ListingProvider>       
+    <ListingProvider>  
+      <ListingFormProvider>     
       <Router>
         <Navbar />
         <div style={{ paddingTop: '80px' }}>
@@ -19,6 +21,7 @@ function App() {
           </Routes>
         </div>
       </Router>
+      </ListingFormProvider>
     </ListingProvider>
   );
 }
