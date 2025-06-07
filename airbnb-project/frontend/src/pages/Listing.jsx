@@ -1,8 +1,9 @@
 import "./Listing.css";
-import { useListings } from "../context/ListingContext";
+import { useListingContext } from "../context/ListingContext";
 
 export default function Listing() {
-  const { state, dispatch, addOrUpdateListing, deleteListing } = useListings();
+ 
+  const { state, dispatch, addOrUpdateListing, deleteListing } = useListingContext();
 
   const handleChange = (e) => {
     dispatch({ type: "SET_FORM", payload: { [e.target.name]: e.target.value } });
