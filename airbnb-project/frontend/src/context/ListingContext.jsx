@@ -1,29 +1,29 @@
 import React, { createContext, useReducer, useEffect, useContext } from "react";
 import axios from "axios";
 
-// Context
 const ListingContext = createContext();
 
-// Custom hook
-export const useListings = () => {
+export const useListingContext = () => {
   const context = useContext(ListingContext);
-  if (!context) throw new Error("useListings must be used within ListingProvider");
+  if (!context) throw new Error("useListingContext must be used within ListingProvider");
   return context;
 };
 
-// Reducer
 const listingReducer = (state, action) => {
   switch (action.type) {
     case "SET_LISTINGS":
-      return action.payload;
+      return { ...state, listings: action.payload };
     default:
       return state;
   }
 };
 
-// Provider
+const initialState = {
+  listings: [],
+};
+
 export function ListingProvider({ children }) {
-  const [listings, dispatch] = useReducer(listingReducer, []);
+  const [state, dispatch] = useReducer(listingReducer, initialState);
 
   const fetchListings = async () => {
     try {
@@ -34,21 +34,16 @@ export function ListingProvider({ children }) {
     }
   };
 
-  const addListing = async (listingData) => {
+  const addOrUpdateListing = async (form, editId) => {
     try {
-      await axios.post("http://localhost:5000/properties", listingData);
+      if (editId) {
+        await axios.put(`http://localhost:5000/properties/${editId}`, form);
+      } else {
+        await axios.post("http://localhost:5000/properties", form);
+      }
       fetchListings();
     } catch (err) {
-      console.error("Add failed:", err);
-    }
-  };
-
-  const updateListing = async (id, updatedData) => {
-    try {
-      await axios.put(`http://localhost:5000/properties/${id}`, updatedData);
-      fetchListings();
-    } catch (err) {
-      console.error("Update failed:", err);
+      console.error("Failed to add/update listing:", err);
     }
   };
 
@@ -66,7 +61,7 @@ export function ListingProvider({ children }) {
   }, []);
 
   return (
-    <ListingContext.Provider value={{ listings, addListing, updateListing, deleteListing }}>
+    <ListingContext.Provider value={{ state, dispatch, addOrUpdateListing, deleteListing }}>
       {children}
     </ListingContext.Provider>
   );

@@ -1,21 +1,23 @@
 import "./Listing.css";
 import { useListingContext } from "../context/ListingContext";
+import { useListingForm } from "../context/ListingFormContext";
 
 export default function Listing() {
- 
-  const { state, dispatch, addOrUpdateListing, deleteListing } = useListingContext();
+  const { state, addOrUpdateListing, deleteListing } = useListingContext();
+  const { form, editId, dispatchForm } = useListingForm();
 
   const handleChange = (e) => {
-    dispatch({ type: "SET_FORM", payload: { [e.target.name]: e.target.value } });
+    dispatchForm({ type: "SET_FORM", payload: { [e.target.name]: e.target.value } });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addOrUpdateListing();
+    addOrUpdateListing(form, editId);
+    dispatchForm({ type: "RESET_FORM" });
   };
 
   const handleEdit = (listing) => {
-    dispatch({ type: "SET_EDIT", payload: listing });
+    dispatchForm({ type: "SET_EDIT", payload: listing });
   };
 
   return (
@@ -25,47 +27,46 @@ export default function Listing() {
         <input
           name="title"
           placeholder="Title"
-          value={state.form.title}
+          value={form.title}
           onChange={handleChange}
           required
         />
         <input
           name="address"
           placeholder="Address"
-          value={state.form.address}
+          value={form.address}
           onChange={handleChange}
           required
         />
         <input
           name="city"
           placeholder="City"
-          value={state.form.city}
+          value={form.city}
           onChange={handleChange}
           required
         />
         <input
           name="country"
           placeholder="Country"
-          value={state.form.country}
+          value={form.country}
           onChange={handleChange}
           required
         />
         <input
           name="price_per_night"
           placeholder="Price per Night"
-          value={state.form.price_per_night}
+          value={form.price_per_night}
           type="number"
           onChange={handleChange}
           required
         />
-        <button type="submit">{state.editId ? "Update" : "Add"} Listing</button>
+        <button type="submit">{editId ? "Update" : "Add"} Listing</button>
       </form>
 
       <div className="listing-list">
         {state.listings.map((listing) => (
           <div className="listing-item" key={listing.id}>
             <h3>{listing.title}</h3>
-            <p>{listing.description}</p>
             <p>
               {listing.address}, {listing.city}, {listing.country}
             </p>

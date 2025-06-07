@@ -1,49 +1,46 @@
 import React, { createContext, useReducer, useContext } from 'react';
 
-//context
 const ListingFormContext = createContext();
 
-// custom hook
 export const useListingForm = () => {
   const context = useContext(ListingFormContext);
-  if (!context) 
-    throw new Error("useListingForm must be used within ListingFormProvider");
+  if (!context) throw new Error("useListingForm must be used within ListingFormProvider");
   return context;
 };
 
-// initial form state
 const initialForm = {
-    id: null,
-    user_id: 1, 
-    title: '',
-    description: '',
-    address: '',
-    city: '',
-    country: '',
-    price_per_night: '',
+  id: null,
+  user_id: 1,
+  title: '',
+  address: '',
+  city: '',
+  country: '',
+  price_per_night: '',
 };
 
+const initialState = {
+  form: initialForm,
+  editId: null,
+};
 
-// reducer function
 const formReducer = (state, action) => {
-    switch (action.type) {
+  switch (action.type) {
     case "SET_FORM":
-      return { ...state, ...action.payload };
+      return { ...state, form: { ...state.form, ...action.payload } };
     case "RESET_FORM":
-      return initialForm;
+      return { form: initialForm, editId: null };
     case "SET_EDIT":
-      return action.payload;
+      return { form: action.payload, editId: action.payload?.id || null };
     default:
       return state;
   }
 };
 
-// provider component
 export function ListingFormProvider({ children }) {
-  const [form, dispatchForm] = useReducer(formReducer, initialForm);
+  const [state, dispatchForm] = useReducer(formReducer, initialState);
 
   return (
-    <ListingFormContext.Provider value={{ form, dispatchForm }}>
+    <ListingFormContext.Provider value={{ form: state.form, editId: state.editId, dispatchForm }}>
       {children}
     </ListingFormContext.Provider>
   );
