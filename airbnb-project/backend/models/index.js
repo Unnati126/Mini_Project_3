@@ -23,3 +23,4 @@ module.exports = {
   Property,
   Review,
 };
+// This module initializes the Sequelize models and their relationships.
